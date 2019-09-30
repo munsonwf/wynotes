@@ -9,7 +9,8 @@ A URL is a type of a Uniform Resource Identifier
 scheme://host:port/path?query
 
 # example
-https://www.benish.com:5051/api/getByName?firstname="greg"
+scheme://    host      :port/   path      ?   query
+ https://www.benish.com:5051/api/getByName?firstname="greg"
 ```
 
 **Scheme** - identifies the protocol to be used. In our example, we're securely requesting the data over HTTP with SSL encryption (e.g., `HTTPS`).
