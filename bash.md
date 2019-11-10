@@ -175,7 +175,7 @@ Below are some definitions to decifer the names and choose the package right for
 
 The takeaway: 32-bit computers are only capabile of handling a limited amount of RAM (think 4GB on a Windows machine). With RAM and processing power consistently on the rise, the need or
 
-## Bash Quick Access, All Departments
+## Full Bash reference
 
 ### `cat` command - ConcATenate
 
@@ -256,6 +256,65 @@ Transfer an URL.
     # -O: save file locally with same name as remote file
     # -L: follow redirects (if first response is 3xx)
 ```
+
+### `dig` - Domain Information Grouper
+
+Get information about DNS name servers. Commonly used to see what domain names resolve to.
+
+```bash
+# run dig on github.com
+$ dig github.com
+
+# results
+; <<>> DiG 9.10.6 <<>> github.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 47887
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+# What was queried (the defult query is for an Internet Address [A])
+;; QUESTION SECTION:
+;github.com.			IN	A
+
+# "Answer" - IP of where to find github.com
+;; ANSWER SECTION:
+github.com.		42	IN	A	140.82.113.3
+
+# statistics about the query
+;; Query time: 28 msec
+;; SERVER: 2001:558:feed::1#53(2001:558:feed::1)
+;; WHEN: Sat Nov 09 21:12:49 EST 2019
+;; MSG SIZE  rcvd: 55
+```
+
+``` bash
+# quick dig
+$ dig github.com +short
+↪ 140.82.113.3
+
+# get trace route
+$ dig github.com +trace
+
+# bring your own nameserver
+$ dig @ns1.you-specify.com github.com
+
+# trim dig output
+$ dig github.com +nostats       # no stats
+$ dig github.com +nocomments    # no header
+$ dig github.com +noall +answer # remove everything, show answer
+
+# Request different types of records
+$ dig github.com NS
+```
+
+Request different types of records
+- A = Internet Address, default (IP address)
+- TXT = Text annotations
+- MX = Mail eXchange (mail servers)
+- NS = Name Server
+
 
 ### `file` command
 
